@@ -1709,14 +1709,107 @@ app.post("/api/payment/easebuzz/initiate", async (req, res) => {
     });
   }
 });
-app.post("/api/payment/easebuzz/callback", async (req, res) => {
+function respondWithRedirect(res, targetUrl) {
+  const safeUrl = String(targetUrl).replace(/"/g, "&quot;");
+  return res.status(200).send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0;url=${safeUrl}">
+  <title>Redirecting to Rangavallika...</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #faf7ff;
+      color: #196966;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .card {
+      background: #ffffff;
+      padding: 36px 28px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      max-width: 440px;
+      width: 100%;
+      border: 1px solid rgba(42, 150, 145, 0.15);
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(42, 150, 145, 0.18);
+      border-top-color: #2a9691;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    h2 {
+      margin: 0 0 10px 0;
+      color: #196966;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    p {
+      margin: 0 0 20px 0;
+      color: #68737d;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #2a9691;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    .btn:hover {
+      background: #196966;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="spinner"></div>
+    <h2>Completing Your Registration...</h2>
+    <p>Please wait while we transfer you back to the receipt page.</p>
+    <a href="${safeUrl}" class="btn">Click Here if Not Redirected →</a>
+  </div>
+  <script>
+    setTimeout(function() {
+      window.location.href = "${safeUrl}";
+    }, 50);
+  </script>
+</body>
+</html>
+  `);
+}
+
+app.all("/api/payment/easebuzz/callback", async (req, res) => {
   try {
     console.log("================================");
     console.log("Easebuzz callback received");
-    console.log(req.body);
+    console.log("Method:", req.method);
+    console.log("Query:", req.query);
+    console.log("Body:", req.body);
     console.log("================================");
 
-    const data = req.body || {};
+    const data = { ...(req.query || {}), ...(req.body || {}) };
 
     const txnid = String(data.txnid || "").trim();
     const status = String(data.status || "").trim().toLowerCase();
@@ -1730,7 +1823,8 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
     ).trim().replace(/\/$/, "");
 
     if (!txnid) {
-      return res.redirect(
+      return respondWithRedirect(
+        res,
         `${frontendBaseUrl}/?payment=failed&error=${encodeURIComponent("Invalid payment response from gateway.")}`
       );
     }
@@ -1750,12 +1844,13 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
 
       const regId = reg?.registration_id || data.udf1 || "";
 
-      return res.redirect(
+      return respondWithRedirect(
+        res,
         `${frontendBaseUrl}/?payment=failed&registration_id=${encodeURIComponent(regId)}&error=${encodeURIComponent("Payment signature verification failed.")}`
       );
     }
 
-    // Find our registration using the transaction ID or udf1
+    // Find our registration using transaction ID or udf1
     const targetId = data.udf1 || txnid;
     const { data: registration, error: registrationError } = await supabase
       .from("rangavallika_registrations")
@@ -1766,7 +1861,8 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
     if (registrationError || !registration) {
       console.error("Registration not found for transaction:", txnid);
 
-      return res.redirect(
+      return respondWithRedirect(
+        res,
         `${frontendBaseUrl}/?payment=failed&error=${encodeURIComponent("Registration record not found.")}`
       );
     }
@@ -1782,7 +1878,8 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
     if (!Number.isFinite(gatewayAmount) || gatewayAmount !== registeredAmount) {
       console.error("Payment amount mismatch", { txnid, gatewayAmount, registeredAmount });
 
-      return res.redirect(
+      return respondWithRedirect(
+        res,
         `${frontendBaseUrl}/?payment=failed&registration_id=${encodeURIComponent(regId)}&error=${encodeURIComponent("Payment amount mismatch detected.")}`
       );
     }
@@ -1804,14 +1901,16 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
       if (updateError) {
         console.error("Failed to update successful payment:", updateError);
 
-        return res.redirect(
+        return respondWithRedirect(
+          res,
           `${frontendBaseUrl}/?payment=failed&registration_id=${encodeURIComponent(regId)}&error=${encodeURIComponent("Database status update failed.")}`
         );
       }
 
       console.log(`Payment SUCCESS: ${regId}`);
 
-      return res.redirect(
+      return respondWithRedirect(
+        res,
         `${frontendBaseUrl}/?payment=success&registration_id=${encodeURIComponent(regId)}`
       );
     }
@@ -1838,7 +1937,8 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
 
       const reason = errorMsg || "Transaction cancelled or payment declined by bank.";
 
-      return res.redirect(
+      return respondWithRedirect(
+        res,
         `${frontendBaseUrl}/?payment=failed&registration_id=${encodeURIComponent(regId)}&reason=${encodeURIComponent(reason)}`
       );
     }
@@ -1846,7 +1946,8 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
     // Any other gateway status (pending, processing)
     console.log(`Easebuzz returned status "${status}" for ${regId}`);
 
-    return res.redirect(
+    return respondWithRedirect(
+      res,
       `${frontendBaseUrl}/?payment=pending&registration_id=${encodeURIComponent(regId)}`
     );
 
@@ -1855,7 +1956,8 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
 
     const fallbackUrl = process.env.FRONTEND_URL || "https://rangoli3.vercel.app";
 
-    return res.redirect(
+    return respondWithRedirect(
+      res,
       `${fallbackUrl.replace(/\/$/, "")}/?payment=failed&error=${encodeURIComponent("An error occurred during payment processing.")}`
     );
   }
