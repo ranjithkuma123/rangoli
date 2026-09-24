@@ -336,113 +336,129 @@ function HomePage() {
           ABOUT US
       ================================================= */}
 
+      {/* =================================================
+          ABOUT US
+      ================================================= */}
+
       <section id="about" className="about-section">
 
         <div className="about-container">
 
           <div className="about-content">
 
-            <div className="section-label">
-              ABOUT US
+            <div className="about-eyebrow">
+              <span className="eyebrow-line">─</span>
+              <span className="eyebrow-icon">🪷</span>
+              <span className="eyebrow-text">ABOUT US</span>
+              <span className="eyebrow-line">─</span>
             </div>
 
-            <h2>
-              About <span>Rangavallika</span>
+            <h2 className="about-heading">
+              About <span className="about-title-script">Rangavalika <span className="title-flower-emoji">🌸</span></span>
             </h2>
 
-            <h3>
+            <h3 className="about-subheading">
               Celebrating creativity,
               <br />
-              tradition & expression.
+              tradition & expression. <span className="pink-heart">💕</span>
             </h3>
 
-            <p>
-              Rangavallika Rangoli Fest is a celebration of
-              creativity, Indian tradition and women's artistic
-              expression, organized by{" "}
-              <strong>
-                Give Laurels Foundation of India.
-              </strong>
+            <p className="about-paragraph">
+              Rangavalika Rangoli Fest is a celebration of creativity, Indian tradition
+              and women's artistic expression, organized by{" "}
+              <strong>Give Laurels Foundation of India.</strong>
             </p>
 
-            <p>
-              The event brings together women from different
-              walks of life to showcase their talent, preserve
-              our cultural heritage and share the beauty of
-              Rangoli art.
+            <p className="about-paragraph">
+              The event brings together women from different walks of life to showcase
+              their talent, preserve our cultural heritage and share the beauty of Rangoli art.
             </p>
 
-            <p>
-              Through Rangavallika, Give Laurels Foundation of
-              India continues its mission of creating
-              opportunities, encouraging creativity and
-              empowering women to contribute to a more
-              inclusive and vibrant community.
+            <p className="about-paragraph">
+              Through Rangavalika, Give Laurels Foundation of India continues its mission
+              of creating opportunities, encouraging creativity and empowering women
+              to contribute to a more inclusive and vibrant community.
             </p>
 
-            <div className="about-signature">
-              Art connects hearts
-              <span>♥</span>
+            <div className="about-signature-block">
+              <span className="signature-text">Art connects hearts 💕</span>
+              <div className="signature-flourish"></div>
             </div>
 
           </div>
 
 
-          <div className="about-values">
+          <div className="about-values-grid">
 
-            <div className="value-item value-pink">
-              <strong>
-                Celebrating
-                <br />
-                Tradition
+            {/* CARD 1 - PINK */}
+            <div className="value-card card-pink">
+              <div className="card-icon-circle icon-pink">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"></path>
+                  <path d="M12 6v12M6 12h12"></path>
+                </svg>
+              </div>
+              <strong className="card-title title-pink">
+                Celebrating Tradition
               </strong>
-
-              <p>
-                Honouring India's rich cultural heritage
-                through the timeless art of Rangoli.
+              <p className="card-desc">
+                Honouring India's rich cultural heritage through the timeless art of Rangoli.
               </p>
+              <div className="card-corner-petal petal-pink"></div>
             </div>
 
 
-            <div className="value-item value-teal">
-              <strong>
-                Encouraging
-                <br />
-                Creativity
+            {/* CARD 2 - TEAL */}
+            <div className="value-card card-teal">
+              <div className="card-icon-circle icon-teal">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18h6M10 22h4M15 9A3 3 0 0 0 9 9c0 2 1 3.5 2 4.5V15h2v-1.5c1-1 2-2.5 2-4.5z"></path>
+                </svg>
+              </div>
+              <strong className="card-title title-teal">
+                Encouraging Creativity
               </strong>
-
-              <p>
-                Providing women with a platform to express
-                their imagination, creativity and talent.
+              <p className="card-desc">
+                Providing women with a platform to express their imagination, creativity and talent.
               </p>
+              <div className="card-corner-petal petal-teal"></div>
             </div>
 
 
-            <div className="value-item value-gold">
-              <strong>
-                Empowering
-                <br />
-                Women
+            {/* CARD 3 - GOLD */}
+            <div className="value-card card-gold">
+              <div className="card-icon-circle icon-gold">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <strong className="card-title title-gold">
+                Empowering Women
               </strong>
-
-              <p>
-                Creating opportunities for women to showcase
-                their skills and celebrate their achievements.
+              <p className="card-desc">
+                Creating opportunities for women to showcase their skills and celebrate their achievements.
               </p>
+              <div className="card-corner-petal petal-gold"></div>
             </div>
 
 
-            <div className="value-item value-green">
-              <strong>
-                Building
-                <br />
-                Community
+            {/* CARD 4 - GREEN */}
+            <div className="value-card card-green">
+              <div className="card-icon-circle icon-green">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </div>
+              <strong className="card-title title-green">
+                Building Community
               </strong>
-
-              <p>
-                Bringing people together through art, culture,
-                creativity and shared experiences.
+              <p className="card-desc">
+                Bringing people together through art, culture, creativity and shared experiences.
               </p>
+              <div className="card-corner-petal petal-green"></div>
             </div>
 
           </div>
