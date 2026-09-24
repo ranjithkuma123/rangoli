@@ -347,10 +347,9 @@ function HomePage() {
           <div className="about-content">
 
             <div className="about-eyebrow">
-              <span className="eyebrow-line">─</span>
-              <span className="eyebrow-icon">🪷</span>
+              <span className="eyebrow-line">─────</span>
               <span className="eyebrow-text">ABOUT US</span>
-              <span className="eyebrow-line">─</span>
+              <span className="eyebrow-line">─────</span>
             </div>
 
             <h2 className="about-heading">
@@ -360,11 +359,17 @@ function HomePage() {
             <h3 className="about-subheading">
               Celebrating creativity,
               <br />
-              tradition & expression. <span className="pink-heart">💕</span>
+              tradition & expression.
             </h3>
 
+            <div className="lotus-divider-wrap">
+              <span className="lotus-line"></span>
+              <span className="lotus-icon">🪷</span>
+              <span className="lotus-line"></span>
+            </div>
+
             <p className="about-paragraph">
-              Rangavalika Rangoli Fest is a celebration of creativity, Indian tradition
+              Rangavallika Rangoli Fest is a celebration of creativity, Indian tradition
               and women's artistic expression, organized by{" "}
               <strong>Give Laurels Foundation of India.</strong>
             </p>
@@ -375,7 +380,7 @@ function HomePage() {
             </p>
 
             <p className="about-paragraph">
-              Through Rangavalika, Give Laurels Foundation of India continues its mission
+              Through Rangavallika, Give Laurels Foundation of India continues its mission
               of creating opportunities, encouraging creativity and empowering women
               to contribute to a more inclusive and vibrant community.
             </p>
@@ -399,12 +404,12 @@ function HomePage() {
                 </svg>
               </div>
               <strong className="card-title title-pink">
-                Celebrating Tradition
+                Celebrating<br />Tradition
               </strong>
+              <div className="card-title-line line-pink"></div>
               <p className="card-desc">
                 Honouring India's rich cultural heritage through the timeless art of Rangoli.
               </p>
-              <div className="card-corner-petal petal-pink"></div>
             </div>
 
 
@@ -416,12 +421,12 @@ function HomePage() {
                 </svg>
               </div>
               <strong className="card-title title-teal">
-                Encouraging Creativity
+                Encouraging<br />Creativity
               </strong>
+              <div className="card-title-line line-teal"></div>
               <p className="card-desc">
                 Providing women with a platform to express their imagination, creativity and talent.
               </p>
-              <div className="card-corner-petal petal-teal"></div>
             </div>
 
 
@@ -436,12 +441,12 @@ function HomePage() {
                 </svg>
               </div>
               <strong className="card-title title-gold">
-                Empowering Women
+                Empowering<br />Women
               </strong>
+              <div className="card-title-line line-gold"></div>
               <p className="card-desc">
                 Creating opportunities for women to showcase their skills and celebrate their achievements.
               </p>
-              <div className="card-corner-petal petal-gold"></div>
             </div>
 
 
@@ -453,12 +458,12 @@ function HomePage() {
                 </svg>
               </div>
               <strong className="card-title title-green">
-                Building Community
+                Building<br />Community
               </strong>
+              <div className="card-title-line line-green"></div>
               <p className="card-desc">
                 Bringing people together through art, culture, creativity and shared experiences.
               </p>
-              <div className="card-corner-petal petal-green"></div>
             </div>
 
           </div>

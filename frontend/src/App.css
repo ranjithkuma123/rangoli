@@ -502,23 +502,7 @@ a {
   padding: 85px 0 85px;
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(
-      circle at 10% 20%,
-      rgba(255, 220, 235, 0.45) 0%,
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 90% 80%,
-      rgba(255, 235, 200, 0.40) 0%,
-      transparent 45%
-    ),
-    linear-gradient(
-      135deg,
-      #fff4f8 0%,
-      #fff8fa 50%,
-      #fff4f7 100%
-    );
+  background: url('/about-clean-bg.png') no-repeat center center / cover;
 }
 
 .about-container {
@@ -566,7 +550,7 @@ a {
   font-size: clamp(38px, 4.2vw, 54px);
   font-weight: 800;
   color: #10545a;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   line-height: 1.1;
   display: flex;
   align-items: center;
@@ -584,12 +568,33 @@ a {
 }
 
 .about-subheading {
-  font-family: 'Caveat', 'Dancing Script', cursive;
-  font-size: clamp(24px, 2.5vw, 30px);
-  line-height: 1.25;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.15;
   color: #10545a;
-  margin: 8px 0 22px;
-  font-weight: 700;
+  margin: 6px 0 16px;
+  font-weight: 800;
+}
+
+.lotus-divider-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.lotus-line {
+  width: 45px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #d4a74e, transparent);
+}
+
+.lotus-line:first-child {
+  background: linear-gradient(-90deg, #d4a74e, transparent);
+}
+
+.lotus-icon {
+  font-size: 18px;
 }
 
 .pink-heart {
@@ -661,7 +666,15 @@ a {
   font-size: 19px;
   font-weight: 800;
   line-height: 1.2;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+}
+
+.card-title-line {
+  width: 24px;
+  height: 2px;
+  background: #d4a74e;
+  border-radius: 2px;
+  margin-bottom: 12px;
 }
 
 .card-desc {
