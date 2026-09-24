@@ -110,6 +110,21 @@ function couponFromAmount(amount) {
   if (amount === 799) return { code: "GTST0246", type: "GTST" };
   return { code: null, type: null };
 }
+function getBackendBaseUrl(req) {
+  const envUrl = (process.env.BACKEND_URL || "").trim().replace(/\/$/, "");
+  if (envUrl && !envUrl.includes("rangoli-backend.vercel.app")) {
+    return envUrl;
+  }
+  if (req) {
+    const proto = req.headers["x-forwarded-proto"] || req.protocol || "https";
+    const host = req.headers["x-forwarded-host"] || req.headers.host;
+    if (host && !host.includes("rangoli-backend.vercel.app")) {
+      return `${proto}://${host}`.replace(/\/$/, "");
+    }
+  }
+  return "https://rangoli3.vercel.app";
+}
+
 function getEasebuzzBaseUrl() {
   const env = String(process.env.EASEBUZZ_ENV || "test")
     .trim()
@@ -1609,11 +1624,13 @@ app.post("/api/payment/easebuzz/initiate", async (req, res) => {
 
     const udf1 = registration_id;
 
+    const backendBase = getBackendBaseUrl(req);
+
     const surl =
-      `${process.env.BACKEND_URL}/api/payment/easebuzz/callback`;
+      `${backendBase}/api/payment/easebuzz/callback`;
 
     const furl =
-      `${process.env.BACKEND_URL}/api/payment/easebuzz/callback`;
+      `${backendBase}/api/payment/easebuzz/callback`;
 
     const hash = generateEasebuzzHash({
       key,
@@ -1819,7 +1836,7 @@ app.all("/api/payment/easebuzz/callback", async (req, res) => {
     // Determine target frontend URL for redirection
     let frontendBaseUrl = (
       process.env.FRONTEND_URL ||
-      "https://rangoli3.vercel.app"
+      getBackendBaseUrl(req)
     ).trim().replace(/\/$/, "");
 
     if (!txnid) {
