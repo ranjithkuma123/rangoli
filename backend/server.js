@@ -111,16 +111,16 @@ function couponFromAmount(amount) {
   return { code: null, type: null };
 }
 function getBackendBaseUrl(req) {
-  const envUrl = (process.env.BACKEND_URL || "").trim().replace(/\/$/, "");
-  if (envUrl && !envUrl.includes("rangoli-backend.vercel.app")) {
-    return envUrl;
-  }
   if (req) {
     const proto = req.headers["x-forwarded-proto"] || req.protocol || "https";
     const host = req.headers["x-forwarded-host"] || req.headers.host;
     if (host && !host.includes("rangoli-backend.vercel.app")) {
       return `${proto}://${host}`.replace(/\/$/, "");
     }
+  }
+  const envUrl = (process.env.BACKEND_URL || "").trim().replace(/\/$/, "");
+  if (envUrl && !envUrl.includes("rangoli-backend.vercel.app")) {
+    return envUrl;
   }
   return "https://rangoli3.vercel.app";
 }
