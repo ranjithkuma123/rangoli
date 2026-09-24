@@ -2,9 +2,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/admin-payments.css";
 
-const API_URL =
-  import.meta.env.VITE_API_URL ||
-  "http://localhost:5000/api";
+const rawApiUrl = String(
+  import.meta.env.VITE_API_URL || "http://localhost:5000"
+).trim().replace(/\/$/, "");
+const API_URL = rawApiUrl.endsWith("/api") ? rawApiUrl : `${rawApiUrl}/api`;
 const PAGE_SIZE = 10;
 
 const AdminPayments = () => {

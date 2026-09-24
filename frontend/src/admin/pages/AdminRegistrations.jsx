@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import AdminRegistrationDetails from "../components/AdminRegistrationDetails";
 
-const API_URL = "http://localhost:5000/api";
+const rawApiUrl = String(
+  import.meta.env.VITE_API_URL || "http://localhost:5000"
+).trim().replace(/\/$/, "");
+const API_URL = rawApiUrl.endsWith("/api") ? rawApiUrl : `${rawApiUrl}/api`;
 
 function AdminRegistrations() {
   const [registrations, setRegistrations] = useState([]);

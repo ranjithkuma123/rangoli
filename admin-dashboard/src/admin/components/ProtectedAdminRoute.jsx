@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5000/api";
+const rawApiUrl = String(
+  import.meta.env.VITE_API_URL || "http://localhost:5000"
+).trim().replace(/\/$/, "");
+const API_URL = rawApiUrl.endsWith("/api") ? rawApiUrl : `${rawApiUrl}/api`;
 
 function ProtectedAdminRoute({ children }) {
   const [checking, setChecking] = useState(true);

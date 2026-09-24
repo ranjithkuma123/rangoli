@@ -994,7 +994,12 @@ function HomePage() {
   message: formData.get("message"),
 };
   try {
-    const response = await fetch("http://localhost:5000/api/queries", {
+    const rawApiUrl = String(
+      import.meta.env.VITE_API_URL || "http://localhost:5000"
+    ).trim().replace(/\/$/, "");
+    const API_ROOT = rawApiUrl.endsWith("/api") ? rawApiUrl : `${rawApiUrl}/api`;
+
+    const response = await fetch(`${API_ROOT}/queries`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

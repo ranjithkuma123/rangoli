@@ -14,9 +14,13 @@ import "./Register.css";
    API
 ========================================================= */
 
-const API_URL =
-  import.meta.env.VITE_API_URL ||
-  "http://localhost:5000";
+const rawApiUrl = String(
+  import.meta.env.VITE_API_URL || "http://localhost:5000"
+).trim().replace(/\/$/, "");
+
+const API_URL = rawApiUrl.endsWith("/api")
+  ? rawApiUrl.slice(0, -4)
+  : rawApiUrl;
 
 
 /* =========================================================
