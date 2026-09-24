@@ -72,13 +72,13 @@ a {
 
 .hero-section {
   width: 100%;
-  min-height: 680px;
+  min-height: 720px;
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
   background: url('/hero-banner-bg.jpg') no-repeat center right / cover;
-  padding: 40px 0 50px;
+  padding: 105px 0 50px;
 }
 
 .hero-container {
