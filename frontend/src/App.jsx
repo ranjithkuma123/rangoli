@@ -410,6 +410,13 @@ function HomePage() {
               <p className="card-desc">
                 Honouring India's rich cultural heritage through the timeless art of Rangoli.
               </p>
+              <div className="card-corner-leaf leaf-pink">
+                <svg width="54" height="54" viewBox="0 0 50 50" fill="none">
+                  <path d="M45 50C45 28 28 12 8 18C22 30 36 42 45 50Z" fill="#d91c78" opacity="0.30"/>
+                  <path d="M48 42C38 24 24 18 12 22C24 30 38 38 48 42Z" fill="#d91c78" opacity="0.22"/>
+                  <path d="M32 48C28 38 18 32 12 35C18 42 26 46 32 48Z" fill="#d91c78" opacity="0.18"/>
+                </svg>
+              </div>
             </div>
 
 
@@ -427,6 +434,13 @@ function HomePage() {
               <p className="card-desc">
                 Providing women with a platform to express their imagination, creativity and talent.
               </p>
+              <div className="card-corner-leaf leaf-teal">
+                <svg width="54" height="54" viewBox="0 0 50 50" fill="none">
+                  <path d="M45 50C45 28 28 12 8 18C22 30 36 42 45 50Z" fill="#087e96" opacity="0.32"/>
+                  <path d="M48 42C38 24 24 18 12 22C24 30 38 38 48 42Z" fill="#087e96" opacity="0.24"/>
+                  <path d="M32 48C28 38 18 32 12 35C18 42 26 46 32 48Z" fill="#087e96" opacity="0.18"/>
+                </svg>
+              </div>
             </div>
 
 
@@ -447,6 +461,13 @@ function HomePage() {
               <p className="card-desc">
                 Creating opportunities for women to showcase their skills and celebrate their achievements.
               </p>
+              <div className="card-corner-leaf leaf-gold">
+                <svg width="54" height="54" viewBox="0 0 50 50" fill="none">
+                  <path d="M45 50C45 28 28 12 8 18C22 30 36 42 45 50Z" fill="#b87e14" opacity="0.32"/>
+                  <path d="M48 42C38 24 24 18 12 22C24 30 38 38 48 42Z" fill="#b87e14" opacity="0.24"/>
+                  <path d="M32 48C28 38 18 32 12 35C18 42 26 46 32 48Z" fill="#b87e14" opacity="0.18"/>
+                </svg>
+              </div>
             </div>
 
 
@@ -464,6 +485,13 @@ function HomePage() {
               <p className="card-desc">
                 Bringing people together through art, culture, creativity and shared experiences.
               </p>
+              <div className="card-corner-leaf leaf-green">
+                <svg width="54" height="54" viewBox="0 0 50 50" fill="none">
+                  <path d="M45 50C45 28 28 12 8 18C22 30 36 42 45 50Z" fill="#207c4d" opacity="0.32"/>
+                  <path d="M48 42C38 24 24 18 12 22C24 30 38 38 48 42Z" fill="#207c4d" opacity="0.24"/>
+                  <path d="M32 48C28 38 18 32 12 35C18 42 26 46 32 48Z" fill="#207c4d" opacity="0.18"/>
+                </svg>
+              </div>
             </div>
 
           </div>

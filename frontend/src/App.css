@@ -683,6 +683,20 @@ a {
   line-height: 1.6;
   color: #5a6578;
   margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.card-corner-leaf {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  line-height: 0;
 }
 
 /* Card 1: Pink */
