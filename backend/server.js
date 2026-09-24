@@ -134,17 +134,6 @@ function getBackendBaseUrl(req) {
 }
 
 function getFrontendBaseUrl(req) {
-  if (req) {
-    const proto = req.headers["x-forwarded-proto"] || req.protocol || "https";
-    const host = req.headers["x-forwarded-host"] || req.headers.host;
-    if (
-      host &&
-      !host.includes("rangoli-frontend.vercel.app") &&
-      !host.includes("rangoli-backend.vercel.app")
-    ) {
-      return `${proto}://${host}`.replace(/\/$/, "");
-    }
-  }
   const envUrl = (process.env.FRONTEND_URL || "").trim().replace(/\/$/, "");
   if (
     envUrl &&
@@ -152,6 +141,18 @@ function getFrontendBaseUrl(req) {
     !envUrl.includes("rangoli-backend.vercel.app")
   ) {
     return envUrl;
+  }
+  if (req) {
+    const proto = req.headers["x-forwarded-proto"] || req.protocol || "https";
+    const host = req.headers["x-forwarded-host"] || req.headers.host;
+    if (
+      host &&
+      !host.includes("rangoli2.vercel.app") &&
+      !host.includes("rangoli-frontend.vercel.app") &&
+      !host.includes("rangoli-backend.vercel.app")
+    ) {
+      return `${proto}://${host}`.replace(/\/$/, "");
+    }
   }
   return "https://rangoli3.vercel.app";
 }
