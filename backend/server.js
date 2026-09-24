@@ -114,12 +114,43 @@ function getBackendBaseUrl(req) {
   if (req) {
     const proto = req.headers["x-forwarded-proto"] || req.protocol || "https";
     const host = req.headers["x-forwarded-host"] || req.headers.host;
-    if (host && !host.includes("rangoli-backend.vercel.app")) {
+    if (
+      host &&
+      !host.includes("rangoli-backend.vercel.app") &&
+      !host.includes("rangoli-frontend.vercel.app")
+    ) {
       return `${proto}://${host}`.replace(/\/$/, "");
     }
   }
   const envUrl = (process.env.BACKEND_URL || "").trim().replace(/\/$/, "");
-  if (envUrl && !envUrl.includes("rangoli-backend.vercel.app")) {
+  if (
+    envUrl &&
+    !envUrl.includes("rangoli-backend.vercel.app") &&
+    !envUrl.includes("rangoli-frontend.vercel.app")
+  ) {
+    return envUrl;
+  }
+  return "https://rangoli3.vercel.app";
+}
+
+function getFrontendBaseUrl(req) {
+  if (req) {
+    const proto = req.headers["x-forwarded-proto"] || req.protocol || "https";
+    const host = req.headers["x-forwarded-host"] || req.headers.host;
+    if (
+      host &&
+      !host.includes("rangoli-frontend.vercel.app") &&
+      !host.includes("rangoli-backend.vercel.app")
+    ) {
+      return `${proto}://${host}`.replace(/\/$/, "");
+    }
+  }
+  const envUrl = (process.env.FRONTEND_URL || "").trim().replace(/\/$/, "");
+  if (
+    envUrl &&
+    !envUrl.includes("rangoli-frontend.vercel.app") &&
+    !envUrl.includes("rangoli-backend.vercel.app")
+  ) {
     return envUrl;
   }
   return "https://rangoli3.vercel.app";
@@ -1834,10 +1865,7 @@ app.all("/api/payment/easebuzz/callback", async (req, res) => {
     const errorMsg = String(data.error_Message || data.error || "").trim();
 
     // Determine target frontend URL for redirection
-    let frontendBaseUrl = (
-      process.env.FRONTEND_URL ||
-      getBackendBaseUrl(req)
-    ).trim().replace(/\/$/, "");
+    let frontendBaseUrl = getFrontendBaseUrl(req);
 
     if (!txnid) {
       return respondWithRedirect(
