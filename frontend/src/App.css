@@ -66,384 +66,366 @@ a {
    HERO
 ========================================================= */
 
-.hero-section {
-  width: 100%;
-
-  min-height: 650px;
-
-  display: flex;
-  align-items: center;
-
-  position: relative;
-
-  overflow: hidden;
-
-  background:
-    radial-gradient(
-      circle at 7% 55%,
-      rgba(24, 175, 164, 0.13),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 94% 48%,
-      rgba(247, 181, 55, 0.13),
-      transparent 30%
-    ),
-    linear-gradient(
-      120deg,
-      #f7fffd 0%,
-      #fffefa 50%,
-      #fffaf0 100%
-    );
-}
-
-
-.hero-container {
-  width: min(1080px, calc(100% - 80px));
-
-  margin: 0 auto;
-
-  min-height: 650px;
-
-  display: grid;
-
-  grid-template-columns:
-    minmax(450px, 1fr)
-    minmax(420px, 0.95fr);
-
-  align-items: center;
-
-  gap: 20px;
-}
-
-
 /* =========================================================
-   HERO CONTENT
+   HERO - PIXEL PERFECT REFERENCE MATCH
 ========================================================= */
 
-.hero-content {
-  position: relative;
-
-  z-index: 2;
-
-  padding: 35px 0;
-}
-
-
-.hero-eyebrow {
+.hero-section {
+  width: 100%;
+  min-height: 680px;
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #fff2f6 0%,
+    #ffedf3 45%,
+    #fff0f5 100%
+  );
+  padding: 40px 0 50px;
+}
 
-  gap: 13px;
+/* Floral Corner Accents */
+.floral-accent {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.85;
+}
 
-  margin-bottom: 18px;
+.floral-accent.top-left {
+  top: -15px;
+  left: -15px;
+  width: 220px;
+  height: 220px;
+  background-image: url('/rangoli-corner.png');
+}
 
-  color: #07869a;
+.floral-accent.bottom-left {
+  bottom: -15px;
+  left: -15px;
+  width: 200px;
+  height: 200px;
+  background-image: url('/rangoli-corner.png');
+  transform: rotate(90deg);
+}
 
-  font-size: 11px;
+.floral-accent.top-right {
+  top: -15px;
+  right: -15px;
+  width: 180px;
+  height: 180px;
+  background-image: url('/rangoli-corner.png');
+  transform: rotate(-90deg);
+}
 
+.hero-container {
+  width: min(1220px, calc(100% - 60px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero Content */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+  padding: 20px 0;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #d91c78;
+  font-size: 13px;
   font-weight: 700;
-
-  letter-spacing: 5px;
-
+  letter-spacing: 3px;
+  margin-bottom: 6px;
   text-transform: uppercase;
 }
 
-
-.hero-eyebrow span {
-  width: 22px;
-  height: 1px;
-
-  background: #e7a51b;
-
-  display: block;
-}
-
-
-.hero-content h1 {
-  margin: 0;
-
+.eyebrow-flower {
+  font-size: 15px;
   color: #d91c78;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: clamp(64px, 6vw, 86px);
-
-  line-height: 0.98;
-
-  font-weight: 700;
-
-  letter-spacing: -3px;
 }
 
-
-.hero-content h2 {
-  margin: 12px 0 0;
-
-  color: #07869a;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: clamp(37px, 3.5vw, 52px);
-
-  line-height: 1;
-
-  letter-spacing: 1px;
+.hero-title-wrap {
+  margin-bottom: 12px;
 }
 
-
-.hero-script {
-  margin: 18px 0 28px;
-
-  color: #174d68;
-
-  font-family: "Brush Script MT", "Segoe Script", cursive;
-
-  font-size: 25px;
-
-  line-height: 1.12;
-}
-
-
-.hero-script span {
-  color: #e99a00;
-}
-
-
-/* =========================================================
-   HERO INFO
-========================================================= */
-
-.hero-info {
-  display: flex;
-  align-items: stretch;
-
-  width: 100%;
-
-  max-width: 590px;
-
-  margin-bottom: 28px;
-}
-
-
-.hero-info-item {
-  flex: 1;
-
-  min-height: 60px;
-
+.main-script-title {
+  font-family: 'Great Vibes', 'Brush Script MT', cursive;
+  font-size: clamp(68px, 6.5vw, 94px);
+  color: #d91c78;
+  line-height: 1.02;
+  margin: 0;
+  font-weight: 400;
   display: flex;
   align-items: center;
-
-  padding: 0 14px;
+  gap: 12px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(217, 28, 120, 0.08);
 }
 
-
-.hero-info-item:first-child {
-  padding-left: 0;
+.title-flower-emoji {
+  font-size: 0.55em;
+  display: inline-block;
+  transform: translateY(-4px);
 }
 
+.main-serif-subtitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(34px, 3.8vw, 54px);
+  font-weight: 800;
+  color: #10545a;
+  letter-spacing: 3px;
+  margin: 2px 0 0;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
 
-.hero-info-item small {
-  display: block;
+.hero-script-tagline {
+  font-family: 'Caveat', 'Dancing Script', cursive;
+  font-size: 27px;
+  line-height: 1.25;
+  color: #0d4a50;
+  margin: 14px 0 28px;
+  font-weight: 600;
+}
 
-  margin-bottom: 5px;
+.tagline-sub {
+  color: #0d4a50;
+}
 
-  color: #66879a;
+/* Badges Row */
+.hero-badges-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 34px;
+}
 
+.badge-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(217, 28, 120, 0.18);
+  padding: 10px 18px;
+  border-radius: 40px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(217, 28, 120, 0.06);
+  transition: all 0.25s ease;
+}
+
+.badge-card:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(217, 28, 120, 0.15);
+  border-color: rgba(217, 28, 120, 0.35);
+}
+
+.badge-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffe4ef 0%, #ffd0e3 100%);
+  color: #d91c78;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(217, 28, 120, 0.15);
+}
+
+.badge-text-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #d91c78;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.badge-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #10545a;
+  line-height: 1.2;
+}
+
+/* Buttons & Links */
+.hero-buttons-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.hero-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 28px;
+  border-radius: 30px;
+  background: linear-gradient(100deg, #d91c78 0%, #c51975 100%);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(217, 28, 120, 0.30);
+  transition: all 0.25s ease;
+}
+
+.hero-primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(217, 28, 120, 0.40);
+  background: linear-gradient(100deg, #e51f82 0%, #d41c7f 100%);
+}
+
+.btn-doc-icon {
+  font-size: 15px;
+}
+
+.btn-arrow {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.hero-primary-btn:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+.hero-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid #10545a;
+  color: #10545a;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.hero-secondary-btn:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 84, 90, 0.15);
+}
+
+.hero-continue-reg-block {
+  display: flex;
+  align-items: center;
+}
+
+.existing-registration-text-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 4px;
+  text-align: left;
+}
+
+.cont-top {
   font-size: 11px;
-
+  color: #777;
   font-weight: 500;
 }
 
-
-.hero-info-item strong {
-  display: block;
-
-  color: #17465d;
-
-  font-size: 16px;
-
-  line-height: 1.35;
-
+.cont-bottom {
+  font-family: 'Caveat', 'Poppins', cursive;
+  font-size: 17px;
   font-weight: 700;
+  color: #d91c78;
+  text-decoration: underline;
+  transition: color 0.2s ease;
 }
 
-
-.info-divider {
-  width: 1px;
-
-  height: 58px;
-
-  background: rgba(22, 68, 93, 0.15);
-
-  flex-shrink: 0;
+.existing-registration-text-btn:hover .cont-bottom {
+  color: #a80f5a;
 }
 
-
-/* =========================================================
-   HERO BUTTONS
-========================================================= */
-
-.hero-buttons {
-  display: flex;
-
-  align-items: center;
-
-  gap: 14px;
-}
-
-
-.primary-button,
-.secondary-button {
-  height: 45px;
-
-  padding: 0 22px;
-
-  border-radius: 24px;
-
-  font-size: 12px;
-
-  font-weight: 600;
-
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-
-.primary-button {
-  border: none;
-
-  color: white;
-
-  background:
-    linear-gradient(
-      100deg,
-      #dd1678,
-      #c51f88
-    );
-
-  box-shadow:
-    0 9px 22px rgba(214, 26, 117, 0.20);
-}
-
-
-.primary-button:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 12px 26px rgba(214, 26, 117, 0.28);
-}
-
-
-.primary-button span {
-  margin-left: 8px;
-}
-
-
-.secondary-button {
-  border: 1px solid #08a4b7;
-
-  color: #087e96;
-
-  background: rgba(255, 255, 255, 0.7);
-}
-
-
-.secondary-button:hover {
-  transform: translateY(-2px);
-
-  background: #ffffff;
-
-  box-shadow:
-    0 7px 18px rgba(8, 164, 183, 0.12);
-}
-
-
-/* =========================================================
-   HERO RANGOLI
-========================================================= */
-
+/* Right Column Art */
 .hero-art {
   position: relative;
-
-  height: 600px;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
+  height: 520px;
 }
 
-
-.art-glow {
+.art-glow-backdrop {
   position: absolute;
-
   width: 480px;
   height: 480px;
-
   border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(248, 183, 48, 0.16),
-      rgba(20, 174, 181, 0.07),
-      transparent 70%
-    );
-
-  filter: blur(8px);
+  background: radial-gradient(circle, rgba(255, 215, 230, 0.6) 0%, rgba(255, 240, 245, 0) 70%);
+  z-index: 1;
 }
 
-/* =========================================================
-   MAIN RANGOLI - 360 DEGREE ROTATION
-========================================================= */
-
-.main-rangoli {
+.art-img-wrapper {
   position: relative;
-
   z-index: 2;
-
-  width: 440px;
-
-  max-width: 100%;
-
-  height: auto;
-
-  display: block;
-
-  object-fit: contain;
-
-  transform-origin: center center;
-
-  animation: rangoliRotate 18s linear infinite;
-
-  filter:
-    drop-shadow(
-      0 18px 25px rgba(27, 94, 104, 0.10)
-    );
+  display: flex;
+  align-items: center;
 }
 
+.main-rangoli-img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(217, 28, 120, 0.12));
+}
 
-/* Continuous 360Â° rotation */
+.handwritten-art-annotation {
+  position: absolute;
+  right: -35px;
+  top: 15%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Caveat', 'Dancing Script', cursive;
+  font-size: 26px;
+  font-weight: 700;
+  color: #2b1d28;
+  line-height: 1.15;
+  transform: rotate(6deg);
+  pointer-events: none;
+}
 
-@keyframes rangoliRotate {
-
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-
+.handwritten-art-annotation span {
+  display: block;
 }
 
 /* =========================================================
