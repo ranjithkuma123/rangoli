@@ -83,24 +83,28 @@ const Payment = ({
 
   const paymentExpired = secondsLeft <= 0;
 
+  const [failureReason, setFailureReason] = useState("");
+
   // Detect return from Easebuzz. The backend verifies the gateway response
   // before redirecting back to the frontend.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const gatewayResult = params.get("payment");
     const returnedRegistrationId = params.get("registration_id");
+    const reasonParam = params.get("reason") || params.get("error");
+
+    if (reasonParam) {
+      setFailureReason(reasonParam);
+    }
 
     if (
-      returnedRegistrationId &&
-      actualRegistrationId &&
-      returnedRegistrationId === actualRegistrationId
+      gatewayResult === "success" ||
+      gatewayResult === "failed" ||
+      gatewayResult === "pending"
     ) {
-      if (gatewayResult === "success") {
-        setPaymentPage("result");
-      } else if (gatewayResult === "failed") {
-        setPaymentPage("result");
-      } else if (gatewayResult === "pending") {
-        setPaymentPage("result");
+      setPaymentPage("result");
+      if (gatewayResult === "failed") {
+        setPaymentStatus("FAILED");
       }
     }
   }, [actualRegistrationId]);
@@ -2072,9 +2076,14 @@ const downloadRegistrationDetails = () => {
         )}
 
         {isFailed && (
-          <div className="verification-notice">
-            <strong>⚠ Payment was not completed</strong>
-            <p>Please start a new secure payment window and try again.</p>
+          <div className="verification-notice failed-notice" style={{ background: "#fff5f5", border: "1px solid #feb2b2", borderRadius: 14, padding: "16px 20px" }}>
+            <strong style={{ color: "#c53030", fontSize: 15 }}>⚠️ Payment Was Not Completed</strong>
+            <p style={{ color: "#742a2a", marginTop: 6, fontSize: 14, lineHeight: 1.5 }}>
+              {failureReason ? failureReason : "The transaction was cancelled or declined by the payment gateway/bank. Don't worry, your registration details are saved."}
+            </p>
+            <div style={{ marginTop: 10, fontSize: 13, color: "#9b2c2c", fontWeight: 600 }}>
+              💡 What you can do: Click "Try Payment Again" below to start a new payment window, or download your registration details slip.
+            </div>
           </div>
         )}
 

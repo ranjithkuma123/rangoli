@@ -1721,53 +1721,70 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
     const txnid = String(data.txnid || "").trim();
     const status = String(data.status || "").trim().toLowerCase();
     const receivedHash = String(data.hash || "").trim().toLowerCase();
+    const errorMsg = String(data.error_Message || data.error || "").trim();
+
+    // Determine target frontend URL for redirection
+    let frontendBaseUrl = (
+      process.env.FRONTEND_URL ||
+      "https://rangoli3.vercel.app"
+    ).trim().replace(/\/$/, "");
 
     if (!txnid) {
-      return res.status(400).send("Invalid payment response");
+      return res.redirect(
+        `${frontendBaseUrl}/?payment=failed&error=${encodeURIComponent("Invalid payment response from gateway.")}`
+      );
     }
 
     // Verify Easebuzz response hash
-    const calculatedHash =
-      generateEasebuzzResponseHash(data).toLowerCase();
+    const calculatedHash = generateEasebuzzResponseHash(data).toLowerCase();
 
     if (!receivedHash || receivedHash !== calculatedHash) {
-      console.error("Easebuzz hash verification failed");
+      console.error("Easebuzz hash verification failed", { receivedHash, calculatedHash });
 
-      return res.status(400).send("Payment verification failed");
+      // Find registration if txnid exists to give context
+      const { data: reg } = await supabase
+        .from("rangavallika_registrations")
+        .select("registration_id")
+        .eq("payment_id", txnid)
+        .maybeSingle();
+
+      const regId = reg?.registration_id || data.udf1 || "";
+
+      return res.redirect(
+        `${frontendBaseUrl}/?payment=failed&registration_id=${encodeURIComponent(regId)}&error=${encodeURIComponent("Payment signature verification failed.")}`
+      );
     }
 
-    // Find our registration using the transaction ID
-    const { data: registration, error: registrationError } =
-      await supabase
-        .from("rangavallika_registrations")
-        .select("*")
-        .eq("payment_id", txnid)
-        .single();
+    // Find our registration using the transaction ID or udf1
+    const targetId = data.udf1 || txnid;
+    const { data: registration, error: registrationError } = await supabase
+      .from("rangavallika_registrations")
+      .select("*")
+      .or(`payment_id.eq.${txnid},registration_id.eq.${targetId}`)
+      .maybeSingle();
 
     if (registrationError || !registration) {
       console.error("Registration not found for transaction:", txnid);
 
-      return res.status(404).send("Registration not found");
+      return res.redirect(
+        `${frontendBaseUrl}/?payment=failed&error=${encodeURIComponent("Registration record not found.")}`
+      );
     }
+
+    const regId = registration.registration_id;
 
     // Verify amount
     const gatewayAmount = Number(data.amount);
     const registeredAmount = Number(
-      registration.package_amount ||
-      registration.payment_amount
+      registration.package_amount || registration.payment_amount
     );
 
-    if (
-      !Number.isFinite(gatewayAmount) ||
-      gatewayAmount !== registeredAmount
-    ) {
-      console.error("Payment amount mismatch", {
-        txnid,
-        gatewayAmount,
-        registeredAmount,
-      });
+    if (!Number.isFinite(gatewayAmount) || gatewayAmount !== registeredAmount) {
+      console.error("Payment amount mismatch", { txnid, gatewayAmount, registeredAmount });
 
-      return res.status(400).send("Payment amount mismatch");
+      return res.redirect(
+        `${frontendBaseUrl}/?payment=failed&registration_id=${encodeURIComponent(regId)}&error=${encodeURIComponent("Payment amount mismatch detected.")}`
+      );
     }
 
     // Successful payment
@@ -1778,36 +1795,24 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
           payment_status: "SUCCESS",
           payment_id: txnid,
           payment_amount_detected: gatewayAmount,
-          payment_date_detected:
-            data.addedon || new Date().toISOString(),
+          payment_date_detected: data.addedon || new Date().toISOString(),
           ocr_status: "EASEBUZZ_VERIFIED",
           updated_at: new Date().toISOString(),
         })
-        .eq("registration_id", registration.registration_id);
+        .eq("registration_id", regId);
 
       if (updateError) {
-        console.error(
-          "Failed to update successful payment:",
-          updateError
-        );
+        console.error("Failed to update successful payment:", updateError);
 
-        return res.status(500).send("Unable to update payment");
+        return res.redirect(
+          `${frontendBaseUrl}/?payment=failed&registration_id=${encodeURIComponent(regId)}&error=${encodeURIComponent("Database status update failed.")}`
+        );
       }
 
-      console.log(
-        `Payment SUCCESS: ${registration.registration_id}`
-      );
-
-      /*
-       * SMS will be connected here later.
-       * We need your SMS provider credentials before
-       * an actual SMS can be sent.
-       */
+      console.log(`Payment SUCCESS: ${regId}`);
 
       return res.redirect(
-        `${process.env.FRONTEND_URL}/?payment=success&registration_id=${encodeURIComponent(
-          registration.registration_id
-        )}`
+        `${frontendBaseUrl}/?payment=success&registration_id=${encodeURIComponent(regId)}`
       );
     }
 
@@ -1827,34 +1832,32 @@ app.post("/api/payment/easebuzz/callback", async (req, res) => {
           payment_status: "FAILED",
           updated_at: new Date().toISOString(),
         })
-        .eq("registration_id", registration.registration_id);
+        .eq("registration_id", regId);
 
-      console.log(
-        `Payment FAILED: ${registration.registration_id}`
-      );
+      console.log(`Payment FAILED: ${regId}`);
+
+      const reason = errorMsg || "Transaction cancelled or payment declined by bank.";
 
       return res.redirect(
-        `${process.env.FRONTEND_URL}/?payment=failed&registration_id=${encodeURIComponent(
-          registration.registration_id
-        )}`
+        `${frontendBaseUrl}/?payment=failed&registration_id=${encodeURIComponent(regId)}&reason=${encodeURIComponent(reason)}`
       );
     }
 
-    // Any other gateway status
-    console.log(
-      `Easebuzz returned status "${status}" for ${registration.registration_id}`
-    );
+    // Any other gateway status (pending, processing)
+    console.log(`Easebuzz returned status "${status}" for ${regId}`);
 
     return res.redirect(
-      `${process.env.FRONTEND_URL}/?payment=pending&registration_id=${encodeURIComponent(
-        registration.registration_id
-      )}`
+      `${frontendBaseUrl}/?payment=pending&registration_id=${encodeURIComponent(regId)}`
     );
 
   } catch (error) {
     console.error("Easebuzz callback error:", error);
 
-    return res.status(500).send("Payment callback error");
+    const fallbackUrl = process.env.FRONTEND_URL || "https://rangoli3.vercel.app";
+
+    return res.redirect(
+      `${fallbackUrl.replace(/\/$/, "")}/?payment=failed&error=${encodeURIComponent("An error occurred during payment processing.")}`
+    );
   }
 });
 /* =========================================================
