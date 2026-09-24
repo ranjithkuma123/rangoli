@@ -77,12 +77,7 @@ a {
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    135deg,
-    #fff2f6 0%,
-    #ffedf3 45%,
-    #fff0f5 100%
-  );
+  background: url('/hero-banner-bg.jpg') no-repeat center right / cover;
   padding: 40px 0 50px;
 }
 
@@ -344,48 +339,25 @@ a {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   height: 520px;
-}
-
-.art-glow-backdrop {
-  position: absolute;
-  width: 480px;
-  height: 480px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 215, 230, 0.6) 0%, rgba(255, 240, 245, 0) 70%);
-  z-index: 1;
-}
-
-.art-img-wrapper {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-}
-
-.main-rangoli-img {
-  width: 100%;
-  max-width: 520px;
-  height: auto;
-  border-radius: 20px;
-  object-fit: contain;
-  filter: drop-shadow(0 15px 35px rgba(217, 28, 120, 0.12));
+  pointer-events: none;
 }
 
 .handwritten-art-annotation {
   position: absolute;
-  right: -35px;
-  top: 15%;
+  right: 15px;
+  top: 18%;
   display: flex;
   flex-direction: column;
   font-family: 'Caveat', 'Dancing Script', cursive;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
-  color: #2b1d28;
+  color: #382531;
   line-height: 1.15;
   transform: rotate(6deg);
   pointer-events: none;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
 }
 
 .handwritten-art-annotation span {

@@ -274,19 +274,11 @@ function HomePage() {
 
 
           <div className="hero-art">
-            <div className="art-glow-backdrop"></div>
-            <div className="art-img-wrapper">
-              <img
-                src="/hero-rangoli.png"
-                alt="Rangavalika Rangoli Fest"
-                className="main-rangoli-img"
-              />
-              <div className="handwritten-art-annotation">
-                <span>Celebrate</span>
-                <span>Art,</span>
-                <span>Culture,</span>
-                <span>You ♥</span>
-              </div>
+            <div className="handwritten-art-annotation">
+              <span>Celebrate</span>
+              <span>Art,</span>
+              <span>Culture,</span>
+              <span>You ♥</span>
             </div>
           </div>
 
