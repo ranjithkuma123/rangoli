@@ -86,42 +86,6 @@ a {
   padding: 40px 0 50px;
 }
 
-/* Floral Corner Accents */
-.floral-accent {
-  position: absolute;
-  pointer-events: none;
-  z-index: 1;
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0.85;
-}
-
-.floral-accent.top-left {
-  top: -15px;
-  left: -15px;
-  width: 220px;
-  height: 220px;
-  background-image: url('/rangoli-corner.png');
-}
-
-.floral-accent.bottom-left {
-  bottom: -15px;
-  left: -15px;
-  width: 200px;
-  height: 200px;
-  background-image: url('/rangoli-corner.png');
-  transform: rotate(90deg);
-}
-
-.floral-accent.top-right {
-  top: -15px;
-  right: -15px;
-  width: 180px;
-  height: 180px;
-  background-image: url('/rangoli-corner.png');
-  transform: rotate(-90deg);
-}
-
 .hero-container {
   width: min(1220px, calc(100% - 60px));
   margin: 0 auto;

@@ -169,11 +169,6 @@ function HomePage() {
 
       <section id="home" className="hero-section">
 
-        {/* Floral Decorative Corners */}
-        <div className="floral-accent top-left"></div>
-        <div className="floral-accent bottom-left"></div>
-        <div className="floral-accent top-right"></div>
-
         <div className="hero-container">
 
           <div className="hero-content">
