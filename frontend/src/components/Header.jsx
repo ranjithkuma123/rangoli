@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 
 function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const goRegister = () => {
+    setMobileMenuOpen(false);
     window.location.href = "/register";
   };
 
   const goToSection = (id) => {
+    setMobileMenuOpen(false);
     const element = document.getElementById(id);
 
     if (!element) {
@@ -86,16 +90,44 @@ function Header() {
           <span>→</span>
         </button>
 
-        {/* MOBILE MENU */}
+        {/* MOBILE MENU TOGGLE BUTTON */}
         <button
           type="button"
           className="mobile-menu"
-          aria-label="Menu"
+          aria-label="Toggle Navigation Menu"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          ☰
+          {mobileMenuOpen ? "✕" : "☰"}
         </button>
 
       </div>
+
+      {/* MOBILE DROPDOWN DRAWER */}
+      {mobileMenuOpen && (
+        <div className="mobile-nav-overlay" onClick={() => setMobileMenuOpen(false)}>
+          <div className="mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+            <button type="button" className="mobile-nav-item" onClick={() => goToSection("home")}>
+              Home
+            </button>
+            <button type="button" className="mobile-nav-item" onClick={() => goToSection("about")}>
+              About Us
+            </button>
+            <button type="button" className="mobile-nav-item" onClick={() => goToSection("guidelines")}>
+              Guidelines
+            </button>
+            <button type="button" className="mobile-nav-item" onClick={() => goToSection("awards")}>
+              Awards
+            </button>
+            <button type="button" className="mobile-nav-item" onClick={() => goToSection("contact")}>
+              Contact
+            </button>
+
+            <button type="button" className="mobile-nav-register-btn" onClick={goRegister}>
+              Register Now <span>→</span>
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

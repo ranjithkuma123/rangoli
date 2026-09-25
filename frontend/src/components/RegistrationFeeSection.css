@@ -1,0 +1,310 @@
+/* =====================================================
+   LUXURY REGISTRATION FEE SECTION STYLES (ALIGNMENT FIXED)
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+.registration-fee-luxury-section {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  scroll-margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px 45px;
+  background-image: url('/registration-fee-bg.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #fffdf9;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.registration-fee-luxury-container {
+  width: min(100%, 1020px);
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header Block */
+.registration-fee-header {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 6;
+}
+
+.fee-header-lotus-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.fee-top-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 2px auto 4px;
+  width: fit-content;
+}
+
+.fee-top-badge .badge-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #a37525;
+  text-transform: uppercase;
+}
+
+.fee-top-badge .badge-line {
+  width: 36px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+}
+
+.fee-main-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(34px, 3.8vw, 48px);
+  font-weight: 700;
+  color: #165b6e;
+  margin: 2px auto 4px;
+  line-height: 1.12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  width: fit-content;
+}
+
+.fee-main-title .fee-highlight {
+  color: #c2185b;
+}
+
+.pink-blossom-icon {
+  margin-left: 2px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.fee-sub-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(18px, 1.8vw, 23px);
+  font-weight: 600;
+  color: #165b6e;
+  margin: 4px auto 4px;
+  text-align: center;
+}
+
+.fee-header-lotus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px auto;
+}
+
+.fee-header-lotus svg {
+  width: 18px;
+  height: 14px;
+}
+
+.fee-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(12px, 1.1vw, 13.5px);
+  font-weight: 400;
+  color: #5c6b73;
+  line-height: 1.48;
+  margin: 3px auto;
+  text-align: center;
+}
+
+/* Center Card Wrapper */
+.fee-card-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 6;
+}
+
+.fee-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 24px 28px 26px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  border: 2px solid #e2ba6e;
+  border-radius: 24px;
+  box-shadow: 
+    0 16px 45px rgba(183, 140, 50, 0.12),
+    0 4px 18px rgba(0, 0, 0, 0.03),
+    inset 0 0 15px rgba(255, 248, 225, 0.6);
+  text-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
+}
+
+.fee-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 22px 55px rgba(183, 140, 50, 0.18),
+    0 6px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Card Inner Corner Flourishes */
+.card-corner-flourish {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.flourish-top-left {
+  top: 0;
+  left: 0;
+}
+.flourish-top-right {
+  top: 0;
+  right: 0;
+}
+.flourish-bottom-left {
+  bottom: 0;
+  left: 0;
+}
+.flourish-bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+/* Card Top Emblem */
+.card-top-emblem-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.card-lotus-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid #d4af37;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.22);
+}
+
+/* Card Content Details */
+.fee-card-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #165b6e;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.fee-card-price {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(46px, 4.6vw, 56px);
+  font-weight: 800;
+  color: #c2185b;
+  line-height: 1.05;
+  margin: 4px 0 8px;
+  letter-spacing: -1px;
+  position: relative;
+  z-index: 2;
+}
+
+.fee-card-subtext {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(12px, 1.05vw, 13px);
+  font-weight: 400;
+  color: #5c6b73;
+  line-height: 1.48;
+  margin: 0 0 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.fee-card-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 30px;
+  background: linear-gradient(90deg, #d81b60, #c2185b);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(216, 27, 96, 0.35);
+  transition: all 0.25s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.fee-card-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #e91e63, #d81b60);
+  box-shadow: 0 12px 28px rgba(216, 27, 96, 0.45);
+}
+
+.btn-arrow {
+  font-size: 15px;
+  transition: transform 0.2s ease;
+}
+
+.fee-card-button:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .registration-fee-luxury-section {
+    padding: 45px 14px 40px;
+    min-height: auto;
+    background-image:
+      radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+      radial-gradient(circle at 10% 90%, rgba(216, 27, 96, 0.08) 0%, transparent 50%),
+      url('/registration-fee-bg.png');
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+  .fee-card {
+    padding: 20px 18px;
+    max-width: 340px;
+  }
+  .fee-card-price {
+    font-size: 44px;
+  }
+}
